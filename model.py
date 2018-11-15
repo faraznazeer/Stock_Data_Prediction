@@ -20,13 +20,13 @@ def predict_price(dates, price, x):
     dates = np.reshape( dates, (251,1) )
 
     
-    lin = SVR( kernel="linear", C=1e3)
-    poly = SVR( kernel="poly", C=1e3, degree=2)
-    rbf = SVR( kernel="rbf", C=1e3, gamma=0.1)
+    lin = SVR( kernel="linear", C=100)
+    poly = SVR( kernel="poly", C=100, degree=2)
+    rbf = SVR( kernel="rbf", C=100, gamma=0.1)
 
     lin.fit(dates,price)    
     poly.fit(dates,price)
-    #rbf.fit(dates,price)
+    rbf.fit(dates,price)
 
     plt.scatter(dates, price, color = "black", label = "Data")
     plt.plot(dates, lin.predict(dates), color = "red", label = "Linear")

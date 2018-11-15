@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 
 
 dates = list(range(251))
+d = []
 price = []
 
 def get_data(filename):
@@ -13,16 +14,16 @@ def get_data(filename):
         Reader = csv.reader(file)
         next(Reader)
         for row in Reader:
-            price.append( float(row[1] ) )
+            price.append( float( row[4] ) )
     return
 
 def predict_price(dates, price, x):
     dates = np.reshape( dates, (251,1) )
 
     
-    lin = SVR( kernel="linear", C=100)
-    poly = SVR( kernel="poly", C=100, degree=2)
-    rbf = SVR( kernel="rbf", C=100, gamma=0.1)
+    lin = SVR( kernel="linear", C=1)
+    poly = SVR( kernel="poly", C=1, degree=2)
+    rbf = SVR( kernel="rbf", C=1, gamma=0.1)
 
     lin.fit(dates,price)    
     poly.fit(dates,price)
